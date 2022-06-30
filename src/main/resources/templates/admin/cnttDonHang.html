@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+<head th:replace="header_admin :: head_admin">
+
+</head>
+
+
+<body>
+
+	<!-- ======= Header ======= -->
+	<header th:replace="header_admin :: header_admin" id="header"
+		class="header fixed-top d-flex align-items-center"> </header>
+	<!-- End Header -->
+
+	<!-- ======= Sidebar ======= -->
+	<aside th:replace="header_admin :: aside_admin" id="sidebar"
+		class="sidebar"></aside>
+	<!-- End Sidebar-->
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Lịch sử đơn hàng</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+					<li class="breadcrumb-item active">Trạng thái đơn hàng</li>
+				</ol>
+			</nav>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="section dashboard">
+			<div class="row">
+				<!-- 
+        Left side columns
+        
+
+            Recent Sales -->
+				<div class="col-12">
+					<div class="card recent-sales overflow-auto">
+			
+						<table class="table table-borderless datatable">
+							<thead>
+								<tr>
+									<th scope="col">ID</th>
+									<th scope="col">ID Admin</th>
+									<th scope="col">Tên Admin</th>
+									<th scope="col">ID Đơn</th>
+									<th scope="col">Ngày Sửa</th>
+									<th scope="col">Thời Gian</th>
+									<th scope="col">Trạng thái</th>
+								</tr>
+							</thead>
+							<tbody>
+								<th:block th:each="cntt : ${cnttdh}">
+									<tr>
+										<td><p th:text="${cntt.cnttdhId}"></p></td>
+										<td><p th:text="${cntt.adminId}"></p></td>
+										<td><th:block th:each="ad : ${listAdmin}">
+												<div th:if=" ${cntt.adminId} == ${ad.adminid} ">
+													<p th:text="${ad.adminten}"></p>
+												</div>
+											</th:block>
+										</td>
+										<td><p th:text="${cntt.dhId}"></p></td>
+										<td><p th:text="${cntt.ngaycn}"></p></td>
+										<td><p th:text="${cntt.thoigiancn}"></p></td>
+										<td><p th:text="${cntt.noidung}"></p></td>
+									</tr>
+								</th:block>
+							</tbody>
+						</table>
+						<!-- end table -->
+					</div>
+
+				</div>
+			</div>
+			<!-- End Recent Sales
+ -->
+
+			<!--  Right side columns -->
+
+		</section>
+
+	</main>
+	<!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<footer th:replace="header_admin :: footer_admin" id="footer"
+		class="footer"> </footer>
+	<!-- End Footer -->
+
+	<a href="#"
+		class="back-to-top d-flex align-items-center justify-content-center"><i
+		class="bi bi-arrow-up-short"></i></a>
+
+	<div th:replace="header_admin :: script_admin"></div>
+
+</body>
+
+</html>

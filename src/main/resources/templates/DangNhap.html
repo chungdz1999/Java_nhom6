@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+<!-- Head BEGIN -->
+<head th:replace="header :: head">
+
+</head>
+<!-- Head END -->
+
+<!-- Body BEGIN -->
+
+<body class="">
+
+	<!-- BEGIN TOP BAR -->
+	<div th:replace="header :: div.pre-header"></div>
+	<!-- END TOP BAR -->
+
+	<!-- BEGIN HEADER -->
+	  <!-- BEGIN HEADER -->
+    <div class="header" >
+      <div class="container">
+        <a class="site-logo" th:href="@{/}"><img th:src="@{/assets/corporate/img/logos/logo-shop-red.png}" alt="Metronic Shop UI"></a>
+
+       
+		
+		
+        <!-- BEGIN CART -->
+        <div class="top-cart-block">
+         
+          <div class="top-cart-content-wrapper">
+            <div class="top-cart-content">
+			
+              </div> 
+            </li>
+            <!-- END TOP SEARCH -->
+			
+          </ul>
+		  
+        </div>
+		
+        <!-- END NAVIGATION -->
+      </div>
+    </div>
+    </div>
+    <!-- Header END -->
+	<!-- end -->
+
+	
+		<div class="container">
+		<div class="row">
+		  <div class="alert alert-info" th:if=${param.DangKyThanhCong}>
+					<div class="alert alert-primary" role="alert">Đăng ký thành công!</div>
+			</div>  
+			<div th:if=${param.Doitc}>
+					<div class="alert alert-info" role="alert">cấp lại mật khẩu thành công!</div>
+			</div> 
+			
+			<h1 class="alert alert-info">ADMIN</h1>
+				<div class="col-sm-8">
+					<form th:action="@{/loginAdmin}" method="post" >
+				<div th:if=${param.error}>
+					<div class="alert alert-danger" role="alert">Sai tài khoản hoặc mật khẩu!!!</div>
+				</div>
+				
+				<div th:if=${param.dangxuat}>
+					<div class="alert alert-dangger" role="alert">Bạn đã đăng xuất</div>
+				</div>
+	
+					<div class="form-group">
+						<label for="exampleInputEmail1">Tên tài khoản</label> 
+						<input
+							type="text" class="form-control" id="username" name = "username"
+							> 
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Mật khẩu</label> 
+						<input
+							type="password" class="form-control" id="password" name = "password"
+							> 
+					</div>
+					
+					
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Đăng nhập</button>
+						<span> chưa có tài khoản? <a href="/" th:href="@{/dang-ky-khach-hang}">Đăng ký</a></span>
+					</div>
+				</form>
+				<hr>
+				
+				<a th:href="@{/forgot_password}">Quên mật khẩu?</a>
+				
+				</div>
+				
+				
+		
+		</div>
+		</div>
+		<br><br><br><br>
+	
+
+
+	<!-- BEGIN PRE-FOOTER -->
+	<div th:replace="header :: pre-footer"></div>
+	<!-- END PRE-FOOTER -->
+
+	<!-- BEGIN FOOTER -->
+
+	<!-- END FOOTER -->
+
+	<!-- BEGIN fast view of a product -->
+
+	<!-- END fast view of a product -->
+
+	<div th:replace="header :: script_kh"></div>
+</body>
+<!-- END BODY -->
+</html>

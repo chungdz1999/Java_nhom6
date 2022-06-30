@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+<!-- Head BEGIN -->
+<head th:replace="header :: head">
+
+</head>
+<!-- Head END -->
+
+<!-- Body BEGIN -->
+
+<body class="ecommerce">
+
+	<!-- BEGIN TOP BAR -->
+	<div th:replace="header :: div.pre-header"></div>
+	<!-- END TOP BAR -->
+
+	<!-- BEGIN HEADER -->
+	<div class="header" th:replace="header :: div.header"></div>
+	<!-- end -->
+
+	<div class="container">
+	<ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link active btn btn-info" href="#">Tất cả</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link  btn btn-info" href="#">Chờ xác nhận</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link  btn btn-info" href="#">Đã xác nhận</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link  btn btn-info" href="#">Đang giao</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link  btn btn-info" href="#">Đã giao</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link  btn btn-info" href="#">Hủy đơn</a>
+    </li>
+  </ul>
+<center>
+ <h2><button type="button" class="btn btn-success">Chi tiết đơn hàng []id]</button></h2>
+ </center>
+ <button type="button" class="btn btn-success">Cập nhật SL</button>
+  
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th>Sản phẩm</th>
+        <th>Số lượng</th>
+        <th>Đơn giá</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>cà phê sữa nóng</td>
+        <td>5</td>
+        <td>20000</td>
+        <td> 100000</td>
+      </tr>
+      <tr>
+        <td>cà phê sữa nóng</td>
+        <td>5</td>
+        <td>20000</td>
+        <td> 100000</td>
+      </tr>
+      <tr>
+        <td>cà phê sữa nóng</td>
+        <td>5</td>
+        <td>20000</td>
+        <td> 100000</td>
+      </tr>
+      <tr>
+        <td>cà phê sữa nóng</td>
+        <td>5</td>
+        <td>20000</td>
+        <td> 100000</td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-success">Tổng: 400000</button>
+  <button type="button" class="btn btn-success">Phí ship: 0</button>
+  <button type="button" class="btn btn-success">Giảm giá: 0</button>
+  <button type="button" class="btn btn-danger">Tổng tiền: 400000</button>
+  
+</div>
+
+
+	<!-- BEGIN PRE-FOOTER -->
+	<div th:replace="header :: pre-footer"></div>
+	<!-- END PRE-FOOTER -->
+
+	<!-- BEGIN FOOTER -->
+
+	<!-- END FOOTER -->
+
+	<!-- BEGIN fast view of a product -->
+
+	<!-- END fast view of a product -->
+
+	<div th:replace="header :: script_kh"></div>
+</body>
+<!-- END BODY -->
+</html>

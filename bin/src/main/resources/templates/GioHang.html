@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+<!-- Head BEGIN -->
+<head th:replace="header :: head">
+  
+</head>
+<!-- Head END -->
+
+<!-- Body BEGIN -->
+
+<div class="main">
+	
+	<!-- BEGIN TOP BAR -->
+   <div th:replace="header :: div.pre-header"></div>
+    <!-- END TOP BAR -->
+
+    <!-- BEGIN HEADER -->
+    <div class="header" th:replace="header :: div.header">
+      
+    </div>
+    <!-- end -->
+
+
+      <div class="container">
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40">
+        
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-12 ">
+            <h1>Giỏ hàng</h1>
+            <div class="goods-page">
+              <div class="goods-data clearfix">
+                <div class="table-wrapper-responsive">
+                <table summary="Shopping cart"   >
+                  <tr>
+                    <th class="goods-page-image">Ảnh</th>
+                    <th class="goods-page-description">Tên sản phẩm</th>
+                    <th class="goods-page-ref-no"></th>
+                    <th class="goods-page-quantity">Số lượng</th>
+                    <th class="goods-page-price">Giá tiền </th>
+                    <th class="goods-page-total" colspan="2">Tá»•ng</th>
+                  </tr>
+    <!--=============== bat dau in ra <td> sáº£n pháº©m ====================-->
+    
+      <th:block th:each="listgh : ${listgiohang}">
+          
+                 
+                  <tr>
+                    <td class="goods-page-image">   
+                      <a href="javascript:;"><img th:src="${ listgh.getProduct().sanphamanhchinh  }" alt="Berry Lace Dress"></a>
+                    </td>
+                    
+                    
+                    
+                    
+                    
+                    <td  class="goods-page-description">
+                      <h3><a href="#" th:text="${listgh.getProduct().sanphamten}"></a></h3>
+                      
+                    </td>
+                   
+                    <td class="goods-page-ref-no">
+                      
+                    </td>
+                    <td class="goods-page-quantity">
+                      <div class="product-quantity">
+                          <input id="product-quantity" type="text" th:value="${listgh.soluong}" readonly class="form-control input-sm">
+                      </div>
+                    </td>
+                    <td class="goods-page-price">
+                      <strong th:text="${listgh.getProduct().sanphamgiatien}"><span>$</span> </strong>
+                    </td>
+                    <td class="goods-page-total">
+                      <strong th:text="${listgh.getProduct().sanphamgiatien} * ${listgh.soluong}"><span>$</span>47.00</strong>
+                    </td>
+                    
+                    
+                    <td class="del-goods-col">
+                    
+                    
+                       <a class="del-goods" th:href="@{/xoagiohangDelete/} + ${listgh.giohangid}">&nbsp;
+                      </a> 
+                      
+                      
+                    </td>
+                    
+                    
+                  </tr>
+                  
+                  
+               
+      </th:block>
+                  
+     <!-- =================  ket thuc================================= -->
+                 
+                </table>
+                </div>
+		
+		<div class="row">
+				<div class="col-sm-6 ">
+					<table >
+					<tr>
+						<td  >
+							<h5   th:text="${kh.khachhangten}"  ></h5>
+						</td >
+					</tr>
+					<tr>
+						<td  >
+							SĐT: <h5   th:text="${kh.khachhangsdt}"  ></h5>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Email: <h5   th:text="${kh.khachhangemail}"  ></h5>
+						</td>
+					</tr>
+					<tr>
+						<td>
+								
+							Địa chỉ: <h5   th:text="${kh.khachhangdiachi}"  ></h5>
+							<h5 th:text="${kvgh_kh.name}"></h5>
+						</td>
+					</tr>
+					<tr>
+						<td   >
+							<!-- <form class="was-validated col-sm-6" th:action="@{/updateKh2}" method="POST" th:object="${kh}">
+						 		<select th:field="*{khuvucghid}" disabled>
+										
+								<option th:each="kvgh : ${kvgh}" th:value="${kvgh.id}" th:text="${kvgh.name}" ></option>
+							</select>
+								</form> -->
+						</td>
+					</tr>
+					
+					</table>
+				
+				
+				</div>
+			
+                <div class="shopping-total" >
+                  <ul>
+                    <li >
+                      <em>Tổng tiền sản phẩm</em>
+                      
+                      <strong     class="price" th:text="${tongtien} "><span>vnÄ‘</span> ...</strong>
+                      
+                    </li>
+                    <li>
+                      <em>Phí ship</em>
+                      <strong class="price"><span th:text="${kvgh_kh.gia}"></span></strong>
+                    </li>
+                    <li class="shopping-total-price">
+                      <em>Tổng cộng</em>
+                      <strong class="price"  th:text="${tongtien} + ${kvgh_kh.gia}"><span>$</span></strong>
+                    </li>
+                  </ul>
+                </div>
+                
+         </div>
+         <!-- end row thong tin khĂ¡ch hĂ ng, tá»•ng tiá»�n -->
+          
+                
+   </div>
+              <!-- <button class="btn btn-default" type="submit">Continue shopping <i class="fa fa-shopping-cart"></i></button> -->
+         
+         <div class="row">
+               <form th:action="@{/dat-hang}" method="post" th:object="${donhang}">
+              	<select th:field="*{phuongthucthanhtoan}">
+										
+				<option value="1">Thanh toán tiền mặt</option>
+  				<option value="100">Thanh toán online</option>
+				</select>
+			<!-- <input type="text" th:name="*{tongtien}"  th:value="${tongtien}"  /> -->
+				<textarea th:field="*{nguoinhanghichu}" class="form-control" id="exampleFormControlTextarea1"
+							rows="3" >  
+				</textarea>
+			
+              <div th:if=" ${tongtien} > 0 ">
+        		
+              <button class="btn btn-primary" type="submit"  onclick="return confirm(' XĂ¡c nháº­n Ä‘áº·t hĂ ng ???')" >
+              Thanh toán 
+              <i class="fa fa-check"></i></button>
+              </div>
+              
+              </form> 
+          </div>     
+              
+   </div>
+            <hr>
+            <hr>
+        <!-- ==============cap nháº­t thĂ´ng tin cĂ¡ nhĂ¢n  ========================   -->
+        <h3>Cập nhật thông tin</h3>
+            <form class="was-validated col-sm-6" th:action="@{/updateKh2}" method="POST" th:object="${kh}"    enctype="multipart/form-data"  >
+				<div class="form-group">
+					
+					<input type="hidden" class="form-control" th:field="*{khachhangid}" readonly="true"  />
+				</div>
+				<div class="form-group">
+					 
+					<input type="hidden" class="form-control" th:field="*{taikhoan}" readonly="true"  />
+				</div>
+				
+				<div class="form-group">
+					<label>Họ và tên:  </label> 
+					<input type="text" class="form-control"  th:field="*{khachhangten}"  required/>
+				</div>
+				<br>
+				<div class="form-group">
+					<label>Email: </label> 
+					<input type="text" class="form-control"  th:field="*{khachhangemail}"  required/>
+				</div>
+				<br>
+				<div class="form-group">
+					<label>SĐT:</label> 
+					<input type="text" class="form-control"  th:field="*{khachhangsdt}"  required/>
+				</div>
+				<br>
+				
+				
+				<div class="form-group">
+						<label>Ảnh hiện tại: </label>
+						<div>
+							<img th:src="${kh.khachhanganh}" alt="..." width="100" height="=100" />
+							<br>
+							<label>Chọn ảnh mới: </label>
+							<input type="file" name="file"   onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0])">
+							
+                                    <img id="blah1"  width="100" height="100" >
+							<input type="hidden" class="form-control" th:field="*{khachhanganh}"/>
+						</div>
+					</div>
+				
+				
+				<div class="form-group">
+					<label> Địa chỉ </label> 
+					<textarea th:field="*{khachhangdiachi}" class="form-control" id="exampleFormControlTextarea1"
+							rows="3"  required>  </textarea>
+				</div>
+				<div class="class="form-group"">
+						
+						
+						<!-- <select class="custom-select" id="inputGroupSelect01">
+							<option selected>Chá»�n khu vá»±c</option>
+							<option value="1">One</option>
+							<option value="2">Two</option>
+							<option value="3">Three</option>
+						</select> -->
+						
+						<div class="form-group">
+									<label for="exampleInputEmail1">  Khu vực giao hàng  </label>
+									 <select th:field="*{khuvucghid}">
+										
+								<option th:each="kvgh : ${kvgh}" th:value="${kvgh.id}" th:text="${kvgh.name}"></option>
+									</select>
+						</div>
+						
+						
+				</div>
+				
+				<br>
+				<button type="submit" class="btn btn-primary"> Cập nhật thông tin</button>
+				</form>   
+            
+            <!-- ket thuc form capp nhat -->
+            
+            
+            
+     </div>
+    <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+
+        <!-- BEGIN SIMILAR PRODUCTS -->
+        <!-- <div th:replace="ChiTietSanPham :: SPPhoBien">
+         
+        </div> -->
+        <!-- END SIMILAR PRODUCTS -->
+      </div>
+      
+      
+      
+	  
+    
+     
+      
+  <!-- end main  -->
+</div>
+    
+    <!-- BEGIN PRE-FOOTER -->
+    <div th:replace="header :: pre-footer">
+      
+    </div>
+    <!-- END PRE-FOOTER -->
+    
+    
+    
+    
+    <div th:replace="header :: script_kh"></div>
+
+</body>
+<!-- END BODY -->
+</html>

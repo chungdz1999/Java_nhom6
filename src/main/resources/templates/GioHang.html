@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+<!-- Head BEGIN -->
+<head th:replace="header :: head">
+  
+</head>
+<!-- Head END -->
+
+<!-- Body BEGIN -->
+
+<div class="main">
+	
+	<!-- BEGIN TOP BAR -->
+   <div th:replace="header :: div.pre-header"></div>
+    <!-- END TOP BAR -->
+
+    <!-- BEGIN HEADER -->
+    <div class="header" th:replace="header :: div.header">
+      
+    </div>
+    <!-- end -->
+
+
+      <div class="container">
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40">
+        
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-12 ">
+          
+          
+          <div th:if=" ${kvgh_kh.id} == 0">
+          	<div class="alert alert-danger" role="alert">Khách hàng chưa cập nhật thông tin cá nhân</div>
+          </div>
+          <div th:if=" ${tongtien} == 0">
+          	<div class="alert alert-danger" role="alert"> Khách hàng chưa thêm sản phẩm vào giỏ hàng</div>
+          </div>
+          
+          
+          
+          
+          <center>
+            <h1 class="alert alert-info">Giỏ hàng</h1>
+            </center>
+            <div class="goods-page">
+              <div class="goods-data clearfix">
+                <div class="table-wrapper-responsive">
+                <table summary="Shopping cart"  style="font-size: 16px;" >
+                  <tr>
+                    <th class="goods-page-image">Ảnh</th>
+                    <th class="goods-page-description">Tên sản phẩm</th>
+                    <th class="goods-page-ref-no"></th>
+                    <th class="goods-page-quantity">Số lượng</th>
+                    <th class="goods-page-price">Giá tiền </th>
+                    <th class="goods-page-total" colspan="2">Tá»•ng</th>
+                  </tr>
+    <!--=============== bat dau in ra <td> sáº£n pháº©m ====================-->
+    
+      <th:block th:each="listgh : ${listgiohang}">
+          
+                 
+                  <tr>
+                    <td class="goods-page-image">   
+                      <a th:href="@{/ChiTietSanPham/} + ${listgh.sanphamid}"><img th:src="${ listgh.getProduct().sanphamanhchinh  }" alt="Berry Lace Dress"></a>
+                    </td>
+                    
+                    
+                    
+                    
+                    
+                    <td  class="goods-page-description">
+                      <h3><a th:href="@{/ChiTietSanPham/} + ${listgh.sanphamid}" th:text="${listgh.getProduct().sanphamten}"></a></h3>
+                      
+                    </td>
+                   
+                    <td class="goods-page-ref-no">
+                      
+                    </td>
+                    <td class="">
+                      <div class=" ">
+                      <div class="row">
+                  <form th:action="@{/capnhatgiohang}" method="post" style="width:30% ; ">
+                      	<input type="hidden" name="giohangid" th:value="  ${listgh.giohangid} " />
+                          <input id="product-quantity" type="number"  name="soluong"  th:value="${listgh.soluong}"  class="form-control input-sm">
+                   		 &nbsp;
+               
+                   		<button class="btn btn-info"  type="submit" ><i class="fa fa-edit"></i>  </button>
+                    </form> 	
+                     </div>
+                     
+                     
+                      </div>
+                    </td>
+                    <td class="goods-page-price">
+                      <strong th:text="${listgh.getProduct().sanphamgiatien}"><span>$</span> </strong>
+                    </td>
+                    <td class="goods-page-total">
+                      <strong th:text="${listgh.getProduct().sanphamgiatien} * ${listgh.soluong}"><span>$</span>47.00</strong>
+                    </td>
+                    
+                    
+                    	
+                    
+                    
+                    <td class="del-goods-col">
+                    
+                    
+                       <!-- <a class="del-goods" th:href="@{/xoagiohangDelete/} + ${listgh.giohangid}">&nbsp;
+                      </a>  -->
+                      
+                      <form th:action="@{/xoagiohang}" method="post">
+                      		
+                      		<input type="hidden" name="giohangid" th:value="  ${listgh.giohangid} " />
+                      		
+                      		<button class="btn btn-success" type="submit"  > Xóa</button> 
+                      
+                      </form>
+                      
+                      
+                    </td>
+                    
+                    
+                  </tr>
+                  
+                  
+               
+      </th:block>
+                  
+     <!-- =================  ket thuc================================= -->
+                 
+                </table>
+                </div>
+		
+		<div class="row">
+				<div class="col-sm-6">
+					<table  style="font-size:16px;">
+					<tr>
+						<td  >
+							<h5   th:text="${kh.khachhangten}"  ></h5>
+						</td >
+					</tr>
+					<tr>
+						<td  >
+							SĐT: <h5   th:text="${kh.khachhangsdt}"  ></h5>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Email: <h5   th:text="${user.email}"  ></h5>
+						</td>
+					</tr>
+					<tr>
+						<td>
+								
+							Địa chỉ: <h5   th:text="${kh.khachhangdiachi}"  ></h5>
+							<h5 th:text="${kvgh_kh.name}"></h5>
+						</td>
+					</tr>
+					<tr>
+						<td   >
+						Thời gian giao	<em><Strong th:text="${kvgh_kh.thoigian}"></Strong> phút</em>
+						</td>
+					</tr>
+					
+					</table>
+				
+				
+				</div>
+			
+                <div class="shopping-total col-sm-3" >
+                  <ul>
+                  
+                    <!-- <li >
+                      <em>Tổng tiền sản phẩm</em>
+                      <strong class="price" th:text="${tongtien} "> ...</strong>
+                      
+                    </li> -->
+                    <li class="shopping-total-price">
+                      <em>Tổng tiền sản phẩm</em>
+                     <strong class="price"  th:text="${tongtien} "></strong> 
+                    </li>
+                    
+                    <li>
+                      <em>Phí ship</em>
+                      <strong class="price"><span th:text="${kvgh_kh.gia}"></span></strong>
+                    </li>
+                    
+                    <li>
+                      <em>Giảm giá: </em>
+                      <strong class="price"><span th:text="-${giamgia}"></span></strong>
+                    </li>
+                    
+                    
+                    <li class="shopping-total-price">
+                      <em>Tổng cộng</em>
+                     <strong class="price"  th:text="${tongtien} + ${kvgh_kh.gia} - ${giamgia}"></strong> 
+                    </li>
+                  </ul>
+                </div>
+                
+                
+              <!--   <table class="con-sm-4 full-right">
+                		<tr>
+                			<td>
+                				Nhập mã giảm giá, Reset hoặc thoát trang sẽ đặt lại giảm giá = 0
+                			</td>
+                		</tr>
+                </table> -->
+                <form class=" col-sm-6 " th:action="@{/kiemtraMagg}" method="POST"
+							>
+          		<div class="form-group ">
+					<h5 class="alert alert-info">Nhập mã giảm giá:</h5>    
+					<input class="form-control" placeholder="Không viết hoa - Không khoảng trắng - không dấu" type="text" required pattern="[a-z,0-9]{1,15}"
+					name="code">
+					<button type="submit" class="btn btn-success">kiểm tra</button>
+				</div>
+				<div th:if=" ${makodung }== 1 ">
+        		<h5 class="text-danger" >Mã giảm giá không đúng</h5>
+        		</div>
+        		<div th:if=" ${mahethan }== 1 ">
+        		<h5 class="text-danger" >Mã giảm giá hết số lần dùng hoặc hết hạn</h5>
+        		</div>
+          </form>
+                
+         </div>
+         
+         
+         <!-- end row thong tin khĂ¡ch hĂ ng, tá»•ng tiá»�n -->
+          
+                
+   </div>
+              <!-- <button class="btn btn-default" type="submit">Continue shopping <i class="fa fa-shopping-cart"></i></button> -->
+         <h1 class="alert alert-info">Đặt hàng</h1>
+         <div class="row">
+               <form th:action="@{/dat-hang}" method="post" th:object="${donhang}">
+              	<select th:field="*{phuongthucthanhtoan}">
+										
+				<option value="1">Thanh toán tiền mặt</option>
+  				<option value="100">Thanh toán online</option>
+				</select>
+				<br>
+			
+				<label>Ghi chú</label>
+				<textarea th:field="*{nguoinhanghichu}" class="form-control" id="exampleFormControlTextarea1"
+							rows="3" >  
+				</textarea>
+				
+				<div class="form-group">
+					 
+					<input type="hidden" class="form-control" th:name="giamgia" th:value="${giamgia}" readonly="true"  />
+				</div>
+			
+              <div th:if=" ${tongtien} > 0 and ${kvgh_kh.id} >0">
+        		
+              <button class="btn btn-primary" type="submit"  onclick="return confirm(' Xác nhận thanh toán ???')" >
+              Thanh toán 
+              <i class="fa fa-check"></i></button>
+              </div>
+              
+              </form> 
+              
+          </div>     
+          
+          
+              
+   </div>
+            <hr>
+            <hr>
+            <br><br>
+            <br>
+        <!-- ==============cap nháº­t thĂ´ng tin cĂ¡ nhĂ¢n  ========================   -->
+        <h1 class="alert alert-info" >Cập nhật thông tin </h1>
+            <form class="was-validated col-sm-6" th:action="@{/updateKh2}" method="POST" th:object="${kh}"    enctype="multipart/form-data"  >
+				<div class="form-group">
+					
+					<input type="hidden" class="form-control" th:field="*{khachhangid}" readonly="true"  />
+				</div>
+				<div class="form-group">
+					 
+					<input type="hidden" class="form-control" th:field="*{taikhoan}" readonly="true"  />
+				</div>
+				
+				<div class="form-group">
+					<label>Họ và tên:  </label> 
+					<input type="text" class="form-control"  th:field="*{khachhangten}"  required/>
+				</div>
+				
+				<br>
+				
+				<br>
+				
+				<div class="form-group">
+					<label>SĐT:</label> 
+					<input type="number" min="100000000" class="form-control"  th:field="*{khachhangsdt}"  required/>
+				</div>
+				<br>
+				
+				
+				<div class="form-group">
+						<label>Ảnh hiện tại: </label>
+						<div>
+							<img th:src="${kh.khachhanganh}" alt="..." width="100" height="=100" />
+							<br>
+							<label>Chọn ảnh mới: </label>
+							<input type="file" name="file"   onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0])">
+							
+                                    <img id="blah1"  width="100" height="100" >
+							<input type="hidden" class="form-control" th:field="*{khachhanganh}"/>
+						</div>
+					</div>
+				
+				
+				<div class="form-group">
+					<label> Địa chỉ </label> 
+					<textarea th:field="*{khachhangdiachi}" class="form-control" id="exampleFormControlTextarea1"
+							rows="3"  required>  </textarea>
+				</div>
+				<div class="class="form-group"">
+						
+						
+						<!-- <select class="custom-select" id="inputGroupSelect01">
+							<option selected>Chá»�n khu vá»±c</option>
+							<option value="1">One</option>
+							<option value="2">Two</option>
+							<option value="3">Three</option>
+						</select> -->
+						
+						<div class="form-group">
+									<label for="exampleInputEmail1">  Khu vực giao hàng  </label>
+									 <select th:field="*{khuvucghid}" required>
+								<option value="">...</option>
+										
+								<option th:each="kvgh : ${kvgh}" th:value="${kvgh.id}" th:text="${kvgh.name}"></option>
+									</select>
+						</div>
+						
+						
+				</div>
+				
+				<br>
+				<button type="submit" class="btn btn-primary"> Cập nhật thông tin</button>
+				</form>   
+            
+            <!-- ket thuc form capp nhat -->
+            
+            
+            
+     </div>
+    <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+
+        <!-- BEGIN SIMILAR PRODUCTS -->
+        <!-- <div th:replace="ChiTietSanPham :: SPPhoBien">
+         
+        </div> -->
+        <!-- END SIMILAR PRODUCTS -->
+      </div>
+      
+      
+      
+	  
+    
+     
+      
+  <!-- end main  -->
+</div>
+    
+    <!-- BEGIN PRE-FOOTER -->
+    <div th:replace="header :: pre-footer">
+      
+    </div>
+    <!-- END PRE-FOOTER -->
+    
+    
+    
+    
+    <div th:replace="header :: script_kh"></div>
+
+</body>
+<!-- END BODY -->
+</html>

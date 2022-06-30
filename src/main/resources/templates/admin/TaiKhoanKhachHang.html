@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+<head th:replace="header_admin :: head_admin">
+
+</head>
+
+
+<body>
+
+	<!-- ======= Header ======= -->
+	<header th:replace="header_admin :: header_admin" id="header"
+		class="header fixed-top d-flex align-items-center"> </header>
+	<!-- End Header -->
+
+	<!-- ======= Sidebar ======= -->
+	<aside th:replace="header_admin :: aside_admin" id="sidebar"
+		class="sidebar"></aside>
+	<!-- End Sidebar-->
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Tài khoản khách hàng</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+					<li class="breadcrumb-item active">Quản lý khách hàng</li>
+				</ol>
+			</nav>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="section dashboard">
+			<div class="row">
+				<!-- 
+        Left side columns
+        
+
+            Recent Sales -->
+				<div class="col-12">
+					<div class="card recent-sales overflow-auto">
+						<table class="table table-borderless datatable">
+							<thead>
+								<tr>
+									<th scope="col">ID TK</th>
+									<th scope="col">ID KH</th>
+									<th scope="col">Họ Tên KH</th>
+									<th scope="col">Email</th>
+									<th scope="col">SĐT</th>
+									<th scope="col">Tài Khoản</th>
+									<th scope="col">Trạng thái</th>
+									<th scope="col">Đổi TT</th>
+									<th scope="col">Cấp lại MK</th>
+								</tr>
+							</thead>
+							<tbody>
+								<th:block th:each="tbl_khachhang : ${listKh}">
+									<tr>
+										<td><p th:text="${tbl_khachhang.taikhoan}"></p></td>
+										<td><p th:text="${tbl_khachhang.khachhangid}"></p></td>
+										<td><p th:text="${tbl_khachhang.khachhangten}"></p></td>
+										<td><p th:text="${tbl_khachhang.khachhangemail}"></p></td>
+										<td><p th:text="${tbl_khachhang.khachhangsdt}"></p></td>
+										<td>
+											<th:block th:each="tk : ${listTk}">
+												<div th:if=" ${tbl_khachhang.taikhoan } == ${tk.id} ">
+													<p th:text="${tk.username}"></p>
+												</div>
+											</th:block>
+										</td>
+										<td>
+
+
+											<div th:if=" ${tbl_khachhang.trangthai }== 1 ">
+												<h5 class="btn btn-success">Active</h5>
+											</div>
+											<div th:if=" ${tbl_khachhang.trangthai }== 0 ">
+												<h5 class="btn btn-danger">Block</h5>
+											</div></td>
+
+
+										<td><a class="btn btn-primary icon"
+											th:href="@{/doitt/} + ${tbl_khachhang.taikhoan}"><i
+												class="bi bi-arrow-repeat"></i></a></td>
+
+										<td><a class="btn btn-primary icon"
+											th:href="@{/rsmk/} + ${tbl_khachhang.taikhoan}"><i
+												class="bi bi-arrow-repeat"></i></a></td>
+
+									</tr>
+								</th:block>
+							</tbody>
+						</table>
+						<!-- end table -->
+					</div>
+
+				</div>
+			</div>
+			
+			<!-- End Recent Sales
+ -->
+
+			<!--  Right side columns -->
+
+		</section>
+
+	</main>
+	<!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<footer th:replace="header_admin :: footer_admin" id="footer"
+		class="footer"> </footer>
+	<!-- End Footer -->
+
+	<a href="#"
+		class="back-to-top d-flex align-items-center justify-content-center"><i
+		class="bi bi-arrow-up-short"></i></a>
+
+	<div th:replace="header_admin :: script_admin"></div>
+
+</body>
+
+</html>

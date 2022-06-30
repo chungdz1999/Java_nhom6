@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+<!-- Head BEGIN -->
+<head th:replace="header :: head">
+
+</head>
+<!-- Head END -->
+
+<!-- Body BEGIN -->
+
+<body class="ecommerce">
+
+	<!-- BEGIN TOP BAR -->
+	<div th:replace="header :: div.pre-header"></div>
+	<!-- END TOP BAR -->
+
+	<!-- BEGIN HEADER -->
+	<div class="header" th:replace="header :: div.header"></div>
+	<!-- end -->
+
+	<div class="main">
+		<div class="container">
+		
+			<div th:if=${param.DaCoTK}>
+					<div class="alert alert-danger" role="alert">Tài khoản này đã tồn tại</div>
+				</div> 
+				<div th:if=${param.TKMKTrong}>
+					<div class="alert alert-danger" role="alert">Không được để trống</div>
+				</div> 
+			
+			<h2>Đăng ký khách hàng</h2>
+				<div class="col-sm-6">
+					<form th:action="@{/dang-ky-khach-hang}" method="post" th:object="${user}">
+
+					<div class="form-group">
+					   
+						<label for="exampleInputEmail1">Tên tài khoản</label> 
+						<input
+							type="text" class="form-control" id="username" th:field="*{username}"
+							required> 
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Mật khẩu</label> 
+						<input
+							type="password" class="form-control" id="password" th:field="*{password}"
+							required> 
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Họ và tên</label> 
+						<input
+							type="text" class="form-control" id="name" th:field="*{name}"
+							required> 
+					</div>
+					
+					<input
+							type="hidden" class="form-control" id="quyen" name="quyen"  value="ROLE_KHACHHANG"
+							> 
+					
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Đăng ký</button>
+						<span>Đã có tài khoản? <a href="/" th:href="@{/dang-nhap-khach-hang}">Đăng nhập</a></span>
+					</div>
+				</form>
+				</div>
+			
+		</div>
+	</div>
+
+
+	<!-- BEGIN PRE-FOOTER -->
+	<div th:replace="header :: pre-footer"></div>
+	<!-- END PRE-FOOTER -->
+
+	<!-- BEGIN FOOTER -->
+
+	<!-- END FOOTER -->
+
+	<!-- BEGIN fast view of a product -->
+
+	<!-- END fast view of a product -->
+
+	<div th:replace="header :: script_kh"></div>
+</body>
+<!-- END BODY -->
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+<!-- Head BEGIN -->
+<head th:fragment="head">
+  <meta charset="utf-8">
+  <title>NhomFS6</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta content="Metronic Shop UI description" name="description">
+  <meta content="Metronic Shop UI keywords" name="keywords">
+  <meta content="keenthemes" name="author">
+
+  <meta property="og:site_name" content="-CUSTOMER VALUE-">
+  <meta property="og:title" content="-CUSTOMER VALUE-">
+  <meta property="og:description" content="-CUSTOMER VALUE-">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="-CUSTOMER VALUE-"><!-- link to image for socio -->
+  <meta property="og:url" content="-CUSTOMER VALUE-">
+
+  <link rel="shortcut icon" th:href="@{/assets/favicon.png}">
+
+  <!-- Fonts START -->
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css"> 
+  <!-- Fonts END -->
+
+  <!-- Global styles START -->          
+  <link th:href="@{/assets/plugins/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+  <link th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <!-- Global styles END --> 
+   
+  <!-- Page level plugin styles START -->
+  <link th:href="@{/assets/plugins/fancybox/source/jquery.fancybox.css}" rel="stylesheet">
+  <link th:href="@{/assets/plugins/owl.carousel/assets/owl.carousel.css}" rel="stylesheet">
+  <link th:href="@{/assets/plugins/uniform/css/uniform.default.css}" rel="stylesheet" type="text/css">
+  
+  <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"><!-- for slider-range -->
+  
+  <link th:href="@{/assets/plugins/rateit/src/rateit.css}" rel="stylesheet" type="text/css">
+  <!-- Page level plugin styles END -->
+
+  <!-- Theme styles START -->
+  <link th:href="@{/assets/pages/css/components.css}" rel="stylesheet">
+  <link th:href="@{/assets/corporate/css/style.css}" rel="stylesheet">
+  <link th:href="@{/assets/pages/css/style-shop.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/assets/corporate/css/style-responsive.css}" rel="stylesheet">
+  <link th:href="@{/assets/corporate/css/themes/red.css}" rel="stylesheet" id="style-color">
+  <link th:href="@{/assets/corporate/css/custom.css}" rel="stylesheet">
+  <!-- Theme styles END -->
+  
+  
+  
+</head>
+<!-- Head END -->
+
+<!-- Body BEGIN -->
+<body class="ecommerce">
+    <!-- BEGIN STYLE CUSTOMIZER -->
+    
+    <!-- END BEGIN STYLE CUSTOMIZER --> 
+
+    <!-- BEGIN TOP BAR -->
+    <div th:fragment="header" class="pre-header">
+        <div class="container">
+            <div class="row">
+                <!-- BEGIN TOP BAR LEFT PART -->
+                <div class="col-md-6 col-sm-6 additional-shop-info">
+                    <ul class="list-unstyled list-inline">
+                        <li><i class="fa fa-phone"></i><span>00098 456 6717</span></li>
+                        <!-- BEGIN CURRENCIES -->
+                        
+                        <!-- END CURRENCIES -->
+                        <!-- BEGIN LANGS -->
+                        <li class="langs-block">
+                            <a href="javascript:void(0);" class="current">VN</a>
+                            <div class="langs-block-others-wrapper"><div class="langs-block-others">
+                              <a href="javascript:void(0);">ENG</a>
+                              <a href="javascript:void(0);">Germany</a>
+                              <a href="javascript:void(0);">Turkish</a>
+                            </div></div>
+                        </li>
+                        <!-- END LANGS -->
+                    </ul>
+                </div>
+               
+                <!-- END TOP BAR LEFT PART -->
+                <!-- BEGIN TOP BAR MENU -->
+                <div class="col-md-6 col-sm-6 additional-nav">
+                    <ul class="list-unstyled list-inline pull-right">
+                        <li><a   th:href="@{/ThongTinKhachHang}">Tài khoản</a></li>
+                        
+                        <li><a  th:href="@{/DonHangKhachHang}">Đơn hàng</a></li>
+                        <li sec:authorize="isAuthenticated()">Xin chào <span sec:authentication="principal.username"></span></li>
+                        
+						 <li sec:authorize="isAuthenticated()"><a  th:href="@{/dangxuat}">Đăng xuất</a></li>
+						 
+						 
+						 
+						 
+						 
+                    </ul>
+                </div>
+                <!-- END TOP BAR MENU -->
+            </div>
+        </div>        
+    </div>
+    <!-- END TOP BAR -->
+
+    <!-- BEGIN HEADER -->
+    <div class="header" >
+      <div class="container">
+        <a class="site-logo" th:href="@{/}"><img th:src="@{/assets/corporate/img/logos/logo-shop-red.png}" alt="Metronic Shop UI"></a>
+
+        <a href="" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+		
+		
+        <!-- BEGIN CART -->
+        <div class="top-cart-block">
+          <div class="top-cart-info">
+            <a href="javascript:void(0);" class="top-cart-info-count">Slượng: 3</a>
+            <a href="javascript:void(0);" class="top-cart-info-value">75k</a>
+          </div>
+          <i class="fa fa-shopping-cart"></i>
+                        
+          <div class="top-cart-content-wrapper">
+            <div class="top-cart-content">
+			
+			<!-- Bắt đầu hiển thị sản phẩm trong giỏ hàng -->
+			
+              <ul class="scroller" style="height: 250px;">
+                <li>
+                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
+                  <span class="cart-content-count">x 1</span>
+                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
+                  <em>$1230</em>
+                  <a href="" class="del-goods">&nbsp;</a>
+                </li>
+				
+				<li>
+                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
+                  <span class="cart-content-count">x 1</span>
+                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
+                  <em>$1230</em>
+                  <a href="" class="del-goods">&nbsp;</a>
+                </li>
+				
+              </ul>
+			  
+			  <!-- kết thúc hiển thị sản phẩm trong giỏ hàng -->
+			  
+			  
+              <div class="text-right">
+                <a th:href="@{/GioHang}" class="btn btn-default">Giỏ hàng</a>
+                <a th:href="@{/ThanhToan}" class="btn btn-primary">Đặt hàng</a>
+              </div>
+            </div>
+          </div>            
+        </div>
+        <!--END CART -->
+		
+
+        <!-- BEGIN NAVIGATION -->
+        <div class="header-navigation">
+			
+          <ul>
+			<li class="dropdown">
+              <a th:href="@{/GioHang}"    >
+                Giỏ hàng
+                
+              </a>
+              
+              
+            </li>
+            
+           
+			
+			<li><a th:href="@{/ThanhToan}">Đặt hàng</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="">
+                Yêu thích
+                
+              </a>
+              
+            </li>
+			
+			<li class="dropdown">
+              
+              
+              
+              
+              
+              
+              
+               
+            </li>
+            
+            <!-- BEGIN TOP SEARCH -->
+            <li class="menu-search">
+              <span class="sep"></span>
+              <i class="fa fa-search search-btn"></i>
+              <div class="">
+              
+              
+              <!--  <form class="form-inline pull-right" action="#"
+				th:action="@{/timsanpham/search}" method="POST">
+				<div class="form-group">
+					<input type="text" class="form-control" name="s"
+						placeholder="search" />
+				</div>
+				<button type="submit" class="btn btn-primary">Search</button>
+			</form>  -->
+			
+			
+			
+			 <div class="row">
+                       
+             <form   name="myForm" id="myForm"    th:action="@{/timsanpham/search}" method="POST" >
+                                        
+                                    
+                            <input  id="message" style="width: 60%; color: black;" class="input-se" type="text" name="s" placeholder="Tìm sản phẩm"  />
+
+                            <button type="submit" class="btn btn-primary">Tìm</button>
+                            
+                            <h4 class="btn btn-info" style="background-color:white;border: none;" id='btnTalk'>
+                                <i id="microphone" style="font-size: 25px;" class="fa fa-microphone hover-transform"></i>
+                            </h4>
+                        </form>   
+
+
+                        
+                  </div>  
+    
+    
+    <script>
+        var message = document.querySelector('#message');
+
+        var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+        var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+
+        var grammar = '#JSGF V1.0;'
+
+        var recognition = new SpeechRecognition();
+        var speechRecognitionList = new SpeechGrammarList();
+        speechRecognitionList.addFromString(grammar, 1);
+        recognition.grammars = speechRecognitionList;
+        recognition.lang = 'vi-VN';
+        recognition.interimResults = false;
+
+        recognition.onresult = function(event) {
+            var lastResult = event.results.length - 1;
+            var content = event.results[lastResult][0].transcript;
+            // message.textContent = 'Voice Input: ' + content ;
+
+            
+            var result9 = content.substring(0, content.length - 1);
+
+            document.getElementById("message").value =result9;
+
+           // location.replace('timsanpham/search/'+result9);
+           document.forms["myForm"].submit();
+
+
+        };
+
+        recognition.onspeechend = function() {
+            recognition.stop();
+            var res = document.getElementById("microphone");
+            res.style.color = "white";
+            
+        };
+
+        recognition.onerror = function(event) {
+            var res = document.getElementById("microphone");
+            res.style.color = "white";
+            message.textContent = 'Error occurred in recognition: ' + event.error;
+        }
+
+        document.querySelector('#btnTalk').addEventListener('click', function(){
+            recognition.start();
+            var res = document.getElementById("microphone");
+            res.style.color = "red";
+        });
+    </script>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+                
+                
+                
+                
+              </div> 
+            </li>
+            <!-- END TOP SEARCH -->
+			
+          </ul>
+		  
+        </div>
+		
+        <!-- END NAVIGATION -->
+      </div>
+    </div>
+    <!-- Header END -->
+
+    
+	
+	<!-- <div class="title-wrapper" style= "background: url(assets/trasua2.jpg);"> -->
+      <!-- <div class="container"><div class="container-inner"> -->
+        <!-- <h1><span></span> </h1> -->
+        <!-- <em></em> -->
+      <!-- </div></div> -->
+    <!-- </div> -->
+	
+
+    <!-- BEGIN PRE-FOOTER -->
+    <div th:fragment="pre-footer" class="pre-footer">
+      <div class="container">
+        
+
+        <div class="row">
+          <!-- BEGIN SOCIAL ICONS -->
+          <div class="col-md-6 col-sm-6">
+            <ul class="social-icons">
+              <li><a class="rss" data-original-title="rss" href="javascript:;"></a></li>
+              <li><a class="facebook" data-original-title="facebook" href="javascript:;"></a></li>
+              <li><a class="twitter" data-original-title="twitter" href="javascript:;"></a></li>
+              <li><a class="googleplus" data-original-title="googleplus" href="javascript:;"></a></li>
+              <li><a class="linkedin" data-original-title="linkedin" href="javascript:;"></a></li>
+              <li><a class="youtube" data-original-title="youtube" href="javascript:;"></a></li>
+              <li><a class="vimeo" data-original-title="vimeo" href="javascript:;"></a></li>
+              <li><a class="skype" data-original-title="skype" href="javascript:;"></a></li>
+            </ul>
+          </div>
+          <!-- END SOCIAL ICONS -->
+          <!-- BEGIN NEWLETTER -->
+          <div class="col-md-6 col-sm-6">
+            <div class="pre-footer-subscribe-box pull-right">
+              <h2>Email</h2>
+              <form action="#">
+                <div class="input-group">
+                  <input type="text" placeholder="youremail@mail.com" class="form-control">
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Gửi</button>
+                  </span>
+                </div>
+              </form>
+            </div> 
+          </div>
+          <!-- END NEWLETTER -->
+        </div>
+      </div>
+    </div>
+    <!-- END PRE-FOOTER -->
+
+    <!-- BEGIN FOOTER -->
+    
+    <!-- END FOOTER -->
+
+    <!-- BEGIN fast view of a product -->
+    
+    <!-- END fast view of a product -->
+	
+	<!-- Load javascripts at bottom, this will reduce page load time -->
+    <!-- BEGIN CORE PLUGINS(REQUIRED FOR ALL PAGES) -->
+    <!--[if lt IE 9]>
+    <script src="assets/plugins/respond.min.js"></script>  
+    <![endif]-->  
+    
+    <div th:fragment="script_kh">
+    <script th:src="@{/assets/plugins/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/jquery-migrate.min.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>      
+    <script th:src="@{/assets/corporate/scripts/back-to-top.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js}" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+
+    <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
+    <script th:src="@{/assets/plugins/fancybox/source/jquery.fancybox.pack.js}" type="text/javascript"></script><!-- pop up -->
+    <script th:src="@{/assets/plugins/owl.carousel/owl.carousel.min.js}" type="text/javascript"></script><!-- slider for products -->
+    <script th:src='@{/assets/plugins/zoom/jquery.zoom.min.js}' type="text/javascript"></script><!-- product zoom -->
+    <script th:src="@{/assets/plugins/bootstrap-touchspin/bootstrap.touchspin.js}" type="text/javascript"></script><!-- Quantity -->
+    <script th:src="@{/assets/plugins/uniform/jquery.uniform.min.js}" type="text/javascript"></script>
+    <script th:src="@{/assets/plugins/rateit/src/jquery.rateit.js}" type="text/javascript"></script>
+    
+    
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js" type="text/javascript"></script><!-- for slider-range -->
+
+    <script th:src="@{/assets/corporate/scripts/layout.js}" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            Layout.init();    
+            Layout.initOWL();
+            Layout.initTwitter();
+            Layout.initImageZoom();
+            Layout.initTouchspin();
+            Layout.initUniform();
+            Layout.initSliderRange();
+        });
+    </script>
+    <!-- END PAGE LEVEL JAVASCRIPTS -->
+    </div>
+</body>
+<!-- END BODY -->
+</html>

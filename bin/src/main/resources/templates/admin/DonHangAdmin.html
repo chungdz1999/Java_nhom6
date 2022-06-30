@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header_admin :: head_admin">
+  
+</head>
+
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header th:replace="header_admin :: header_admin" id="header" class="header fixed-top d-flex align-items-center">
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside th:replace="header_admin :: aside_admin" id="sidebar" class="sidebar">
+
+    
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        
+
+            <!-- Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Danh sĂ¡ch<span>| all</span></h5>
+
+                <ul class="nav nav-pills mx-auto">
+    <li class="nav-item">
+      <a class="nav-link active btn btn-info" th:href="@{/DonHangAdmin} " >Tất cả
+      <p th:text="${diemDH }" > </p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active btn btn-info" th:href="@{/danhmucDHAdmin/} + 1" > Chờ xác nhận
+      	<p th:text="${diemDH1 }" > </p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active btn btn-info" th:href="@{/danhmucDHAdmin/} + 2" >Đã xác nhận
+      	<p th:text="${diemDH2 }" > </p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active btn btn-info" th:href="@{/danhmucDHAdmin/} + 3" >Đang giao
+      	<p th:text="${diemDH3 }" > </p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active btn btn-info"th:href="@{/danhmucDHAdmin/} + 4" >Đã giao-Hoàn thành
+      		<p th:text="${diemDH4 }" > </p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active btn btn-info" th:href="@{/danhmucDHAdmin/} + 99"> Hủy đơn 
+      		<p th:text="${diemDH99 }" > </p>
+      </a>
+    </li>
+  </ul>
+  
+  
+  <hr>
+<center>
+ <h2><button type="button" class="btn btn-success">Danh sách đơn hàng</button></h2>
+ </center>
+  
+  
+  
+  
+  
+  <th:block th:each="donhangkh : ${donhangkh}">
+  
+  <table class="table" style="background-color:#E6E6E6 ;"    >
+  		<thead class="thead-light">
+  		<tr>
+  			<th>Tên người nhận</th>
+  			<th>SĐT người nhận</th>
+  			<th>Email người nhận</th>
+  			<th>Ghi chú khách hàng</th>
+  			<th> Địa chỉ người nhận</th>
+  			
+  		</tr>
+  		</thead>
+  		<tr>
+  			<td th:text="${donhangkh.nguoinhanten }"></td>
+  			<td th:text="${donhangkh.nguoinhansdt }"></td>
+  			<td th:text="${donhangkh.nguoinhanemail }"></td>
+  			<td th:text="${donhangkh.nguoinhanghichu }"></td>
+  			<td th:text="${donhangkh.nguoinhandiachi }"></td>
+  		</tr>
+
+</table>
+			<div th:if=" ${donhangkh.trangthaidonhangid } < 4  ">
+				<form th:action="@{/cap-nhat-shipper}" method="post" class="col-sm-6" th:object="${newdh}" >
+					 <input type="hidden" class="form-control"  th:name="donhangid" th:value="${donhangkh.donhangid}"   />
+					<div class="form-group">
+						<label for="exampleInputEmail1">Tên shipper</label> 
+						<input
+							type="text" class="form-control" th:name="shipten" th:value="${donhangkh.shipten}"
+							required> 
+					</div> 
+					<div class="form-group">
+						<label for="exampleInputEmail1">SĐT shipper</label> 
+						<input
+							type="number" class="form-control" th:name="shipsdt" th:value="${donhangkh.shipsdt}"
+							required> 
+					</div>
+					
+					
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Cập nhật shipper</button>
+						
+					</div>
+				</form>
+			</div>
+			<div th:if=" ${donhangkh.trangthaidonhangid } ==99   ">
+				<form th:action="@{/cap-nhat-shipper}" method="post" class="col-sm-6" th:object="${newdh}" >
+					 <input type="hidden" class="form-control"  th:name="donhangid" th:value="${donhangkh.donhangid}"   />
+					<div class="form-group">
+						<label for="exampleInputEmail1">Tên shipper</label> 
+						<input
+							type="text" class="form-control" th:name="shipten" th:value="${donhangkh.shipten}"
+							Readonly> 
+					</div> 
+					<div class="form-group">
+						<label for="exampleInputEmail1">SĐT shipper</label> 
+						<input
+							type="number" class="form-control" th:name="shipsdt" th:value="${donhangkh.shipsdt}"
+							Readonly> 
+					</div>
+				
+					
+					
+					
+				</form>
+			</div>
+			
+			
+			<div th:if=" ${donhangkh.trangthaidonhangid } <= 4  and  ${donhangkh.trangthaidonhangid } > 0   ">
+				<form th:action="@{/cap-nhat-shipper}" method="post" class="col-sm-6" th:object="${newdh}" >
+					 <input type="hidden" class="form-control"  th:name="donhangid" th:value="${donhangkh.donhangid}"   />
+					<div class="form-group">
+						<label for="exampleInputEmail1">Tên shipper</label> 
+						<input
+							type="text" class="form-control" th:name="shipten" th:value="${donhangkh.shipten}"
+							Readonly> 
+					</div> 
+					<div class="form-group">
+						<label for="exampleInputEmail1">SĐT shipper</label> 
+						<input
+							type="number" class="form-control" th:name="shipsdt" th:value="${donhangkh.shipsdt}"
+							Readonly> 
+					</div>
+				
+					
+					
+					
+				</form>
+			</div>
+			
+
+
+
+<table class="table" style=" border-radius: 25px; background-color: #A9D0F5 ;   " >
+    <thead class="thead-light">
+      <tr>
+        <th>Id Đơn hàng</th>
+        <th>Trạng thái hiện tại</th>
+        <th> Thời gian đặt</th>
+        <th>Thời gian giao</th>
+        <th>Phương thức thanh toán</th>
+        <th>Phí vận chuyển</th>
+        <th> Tổng tiền</th>
+        <th> Xử lý đơn</th>
+       </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td th:text="${donhangkh.donhangid }"></td>
+        <td   >
+        	<div th:if=" ${donhangkh.trangthaidonhangid }== 1 ">
+        		<h5 class="btn btn-primary" >Chờ xác nhận</h5>
+        	</div>
+        	<div th:if=" ${donhangkh.trangthaidonhangid }== 2 ">
+        		<h5 class="btn btn-warning" >  Đã xác nhận </h5>
+        	</div>
+        	<div th:if=" ${donhangkh.trangthaidonhangid }== 3 ">
+        		<h5 class="btn btn-success">  Đang giao    </h5>
+        	</div>
+        	<div th:if=" ${donhangkh.trangthaidonhangid }== 4 ">
+        		<h5 class="btn btn-danger"> Đã giao-hoàn thành </h5>
+        	</div>
+        	
+        	<div th:if=" ${donhangkh.trangthaidonhangid }== 99 ">
+        		<h5 class="btn btn-danger" disabled> Hủy đơn </h5>
+        	</div>
+        
+        
+        </td>
+       
+       
+       
+        <td >
+        	<h5 th:text="${donhangkh.ngaytao }" > </h5>
+        	<h5 th:text="${donhangkh.thoigiantao }" > </h5>
+        </td>
+        
+        <td th:text="${donhangkh.thoigiangiao }"  >
+        </td>
+        
+        <td  > 
+        	<div th:if=" ${donhangkh.phuongthucthanhtoan }== 1 ">
+        		<h5> Thanh toán khi nhận hàng </h5>
+        	</div>
+        	
+        	<div th:if=" ${donhangkh.phuongthucthanhtoan }== 100 ">
+        		<h5>  Thanh toán online   </h5>
+        	</div>
+        	
+        </td>
+        
+        
+        
+        
+        <td th:text="${donhangkh.phivanchuyen}" > </td>
+         <td th:text="${donhangkh.tongtien}" > </td>
+         <td>
+         <div th:if=" ${donhangkh.trangthaidonhangid }== 1 ">
+         
+         	<form class="was-validated" th:action="@{/cap-nhat-don-hang}" method="POST" th:object="${newdh}">
+         			
+        <input type="hidden" class="form-control"  th:name="donhangid" th:value="${donhangkh.donhangid}"   />
+         <input type="hidden" class="form-control"  th:name="trangthaidonhangid" th:value="2"   />
+         			
+         			<input class="btn btn-danger" type="submit"  value="Xác nhận đơn hàng "    onclick="return confirm(' XĂƒÂ¡c nhĂ¡ÂºÂ­n hĂ¡Â»Â§y Ă„â€˜Ă†Â¡n hĂƒÂ ng nĂƒÂ y ???')"    />
+         	
+         	</form>
+         
+         </div>
+         
+         <div th:if=" ${donhangkh.trangthaidonhangid }== 2 ">
+         
+         	<form class="was-validated" th:action="@{/cap-nhat-don-hang}" method="POST" th:object="${newdh}">
+         			
+        <input type="hidden" class="form-control"  th:name="donhangid" th:value="${donhangkh.donhangid}"   />
+         <input type="hidden" class="form-control"  th:name="trangthaidonhangid" th:value="3"   />
+         			
+         			<input class="btn btn-danger" type="submit"  value="Đang giao hàng "    onclick="return confirm(' XĂƒÂ¡c nhĂ¡ÂºÂ­n hĂ¡Â»Â§y Ă„â€˜Ă†Â¡n hĂƒÂ ng nĂƒÂ y ???')"    />
+         	
+         	</form>
+         
+         </div>
+         
+         
+         <div th:if=" ${donhangkh.trangthaidonhangid }== 3 ">
+         
+         	<form class="was-validated" th:action="@{/cap-nhat-don-hang}" method="POST" th:object="${newdh}">
+         			
+        <input type="hidden" class="form-control"  th:name="donhangid" th:value="${donhangkh.donhangid}"   />
+         <input type="hidden" class="form-control"  th:name="trangthaidonhangid" th:value="4"   />
+         			
+         			<input class="btn btn-danger" type="submit"  value="Đã giao-hoàn thành"    onclick="return confirm(' XĂƒÂ¡c nhĂ¡ÂºÂ­n hĂ¡Â»Â§y Ă„â€˜Ă†Â¡n hĂƒÂ ng nĂƒÂ y ???')"    />
+         	
+         	</form>
+         
+         </div>
+         
+         
+         
+         
+         
+         
+         
+         
+         </td>
+      </tr>
+      
+      <!-- <tr>
+      
+      	<td colspan="5">
+      		<button type="button" class="btn btn-success">TĂƒÂ¡Ă‚Â»Ă¢â‚¬Â¢ng: 400000</button>
+			  <button type="button" class="btn btn-success">PhĂƒÆ’Ă‚Â­ ship: 0</button>
+			  <button type="button" class="btn btn-success">GiĂƒÂ¡Ă‚ÂºĂ‚Â£m giĂƒÆ’Ă‚Â¡: 0</button>
+			  <button type="button" class="btn btn-danger">TĂƒÂ¡Ă‚Â»Ă¢â‚¬Â¢ng tiĂƒÂ¡Ă‚Â»Ă¯Â¿Â½n: 400000</button>
+      	</td>
+      </tr> -->
+     
+    </tbody>
+  </table>
+  
+  
+  
+  
+  <center>
+  <table class="table" style="background-color:  #CEECF5 ; width:90% "   >
+ 	<thead class="thead-light">
+      <tr>
+      <th > Ảnh </th>
+        <th >   Tên sản phẩm   </th>
+        <th>  Giá tiền  </th>
+        <th>  Số lượng   </th>
+        
+       </tr>
+    </thead>
+  <th:block th:each="ctdh : ${ctdh}">
+  
+  
+  <div th:if="${donhangkh.donhangid } == ${ ctdh.donhangid }">
+  		
+  		
+    
+    <tbody>
+      <tr>
+    <td >
+      	
+      	<th:block th:each="sanpham : ${sanpham}">
+      		 
+      		<div th:if="${sanpham.sanphamid } == ${ ctdh.ctdhidsp }">
+      		
+      			<img style="height: 70px; width:70px;"  th:src="${sanpham.sanphamanhchinh}" class="img-responsive" alt="ảnh sản phẩm">
+      		
+      		</div>
+      		 
+      		 
+      	</th:block>
+      		
+      
+      
+      </td>
+      
+      
+      
+        <td th:text="${ ctdh.ctdhtensp }"></td>
+        <td th:text="${ ctdh.ctdhgiasp }"></td>
+        <td th:text="${ ctdh.ctdhsoluongsp }"></td>
+      </tr>
+      
+      <!-- <tr>
+      
+      	<td colspan="5">
+      		<button type="button" class="btn btn-success">TĂƒÂ¡Ă‚Â»Ă¢â‚¬Â¢ng: 400000</button>
+			  <button type="button" class="btn btn-success">PhĂƒÆ’Ă‚Â­ ship: 0</button>
+			  <button type="button" class="btn btn-success">GiĂƒÂ¡Ă‚ÂºĂ‚Â£m giĂƒÆ’Ă‚Â¡: 0</button>
+			  <button type="button" class="btn btn-danger">TĂƒÂ¡Ă‚Â»Ă¢â‚¬Â¢ng tiĂƒÂ¡Ă‚Â»Ă¯Â¿Â½n: 400000</button>
+      	</td>
+      </tr> -->
+     
+    </tbody>
+  
+  
+  </div>
+  
+  
+  </th:block>
+  </table>
+  </center>
+  
+  <hr style=" height: 5px;color: red; border: 1; ">
+  <hr style=" height: 5px;color: red; border: 1; ">
+  </th:block>
+  
+  
+  
+
+  </div>
+
+  </div>
+            </div><!-- End Recent Sales -->
+
+            
+
+          </div>
+        </div><!-- End Left side columns -->
+
+        <!-- Right side columns -->
+        
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer th:replace="header_admin :: footer_admin" id="footer" class="footer">
+    
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <div th:replace="header_admin :: script_admin"></div>
+
+</body>
+
+</html>

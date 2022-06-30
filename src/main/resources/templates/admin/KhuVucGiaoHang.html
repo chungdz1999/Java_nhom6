@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+<head th:replace="header_admin :: head_admin">
+
+</head>
+
+
+<body>
+
+	<!-- ======= Header ======= -->
+	<header th:replace="header_admin :: header_admin" id="header"
+		class="header fixed-top d-flex align-items-center"> </header>
+	<!-- End Header -->
+
+	<!-- ======= Sidebar ======= -->
+	<aside th:replace="header_admin :: aside_admin" id="sidebar"
+		class="sidebar"></aside>
+	<!-- End Sidebar-->
+
+	<main id="main" class="main">
+
+		<div class="pagetitle">
+			<h1>Khu vực giao hàng</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+					<li class="breadcrumb-item active">Quản lý khu vực giao</li>
+				</ol>
+			</nav>
+		</div>
+		<!-- End Page Title -->
+
+		<section class="section dashboard">
+			<div class="row">
+				<!-- 
+        Left side columns
+        
+
+            Recent Sales -->
+				<div class="col-12">
+					<div class="card recent-sales overflow-auto">
+						<!--  bat dau form  -->
+						
+						<form class="col-8" th:action="@{/saveKvgh}" method="POST"
+							th:object="${Kvgh}">
+							<div class="form-group ">
+								<h5>Tên khu vực:</h5>
+								<input class="form-control" placeholder="Nhập tên khu vực"
+									th:field="*{name}">
+							</div>
+							<br>
+							<div class="form-group">
+								<h5>Phí ship:</h5>
+								<input class="form-control" id="" placeholder="Nhập phí ship"
+									th:field="*{gia}">
+							</div>
+							<br>
+							<div class="form-group">
+								<h5>Thời gian giao:</h5>
+								<input class="form-control" id=""
+									placeholder="Nhập thời gian giao" th:field="*{thoigian}">
+							</div>
+							<br>
+							<div class="form-group">
+								<h5>Trạng thái:</h5>
+								
+									
+									 <select class="form-select" th:field="*{trangthai}">
+										<option th:value="1">hiển thị </option>
+								<option th:value="99">Ẩn </option>
+								
+									</select>
+							</div>
+							<br> <a th:href="@{/Kvgh-list}"><button type="submit"
+									class="btn btn-primary">Thêm KV</button></a>
+						</form>
+						<br> <br>
+						<!--  ket thuc  form 
+			
+			bat dau table -->
+						<table class="table table-borderless datatable">
+							<thead>
+								<tr>
+									<th scope="col">ID</th>
+									<th scope="col">Tên KV</th>
+									<th scope="col">Phí ship</th>
+									<th scope="col">Thời gian giao</th>
+									<th scope="col">Trạng thái</th>
+									<th scope="col">Sửa</th>
+									<th scope="col">Xóa</th>
+								</tr>
+							</thead>
+							<tbody>
+								<th:block th:each="tbl_khuvucgh : ${listKvgh}">
+									<tr>
+										<td><p th:text="${tbl_khuvucgh.id}"></p></td>
+										<td><p th:text="${tbl_khuvucgh.name}"></p></td>
+										<td><p th:text="${tbl_khuvucgh.gia}"></p></td>
+										<td><p th:text="${tbl_khuvucgh.thoigian}"></p></td>
+										<td>
+
+
+											<div th:if=" ${tbl_khuvucgh.trangthai }== 1 ">
+												<h5 class="btn btn-primary">Hiển thị</h5>
+											</div>
+											<div th:if=" ${tbl_khuvucgh.trangthai }== 99 ">
+												<h5 class="btn btn-warning">Ẩn</h5>
+											</div></td>
+
+
+										<td><a class="btn btn-primary"
+											th:href="@{/Kvgh-update/} + ${tbl_khuvucgh.id}">Sửa</a></td>
+										<td><a class="btn btn-danger"
+											th:href="@{/KvghDelete/} + ${tbl_khuvucgh.id}"
+											onclick="return confirm(' Xác nhận xóa ???')">Xóa</a></td>
+									</tr>
+								</th:block>
+							</tbody>
+						</table>
+						<!-- end table -->
+					</div>
+
+				</div>
+			</div>
+			<!-- End Recent Sales
+ -->
+
+			<!--  Right side columns -->
+
+		</section>
+
+	</main>
+	<!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<footer th:replace="header_admin :: footer_admin" id="footer"
+		class="footer"> </footer>
+	<!-- End Footer -->
+
+	<a href="#"
+		class="back-to-top d-flex align-items-center justify-content-center"><i
+		class="bi bi-arrow-up-short"></i></a>
+
+	<div th:replace="header_admin :: script_admin"></div>
+
+</body>
+
+</html>

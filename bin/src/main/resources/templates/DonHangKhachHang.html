@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+<!-- Head BEGIN -->
+<head th:replace="header :: head">
+
+</head>
+<!-- Head END -->
+
+<!-- Body BEGIN -->
+
+<body class="ecommerce">
+
+	<!-- BEGIN TOP BAR -->
+	<div th:replace="header :: div.pre-header"></div>
+	<!-- END TOP BAR -->
+
+	<!-- BEGIN HEADER -->
+	<div class="header" th:replace="header :: div.header"></div>
+	<!-- end -->
+
+	<div class="container">
+	
+	
+	 <ul class="nav nav-pills mx-auto">
+    <li class="nav-item">
+      <a class="nav-link active btn btn-info" th:href="@{/DonHangKhachHang} " >Tất cả
+      <p th:text="${diemDH }" > </p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active btn btn-info" th:href="@{/danhmucDH/} + 1" > Chờ xác nhận
+      	<p th:text="${diemDH1 }" > </p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active btn btn-info" th:href="@{/danhmucDH/} + 2" >Đã xác nhận
+      	<p th:text="${diemDH2 }" > </p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active btn btn-info" th:href="@{/danhmucDH/} + 3" >Đang giao
+      	<p th:text="${diemDH3 }" > </p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active btn btn-info"th:href="@{/danhmucDH/} + 4" >Đã giao-Hoàn thành
+      		<p th:text="${diemDH4 }" > </p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active btn btn-info" th:href="@{/danhmucDH/} + 99"> Hủy đơn 
+      		<p th:text="${diemDH99 }" > </p>
+      </a>
+    </li>
+  </ul>
+  
+  
+  <hr>
+<center>
+ <h2><button type="button" class="btn btn-success"> Danh sách đơn hàng</button></h2>
+ </center>
+  
+  
+  
+  
+  
+  <th:block th:each="donhangkh : ${donhangkh}">
+  
+  <table class="table" style="background-color:#E6E6E6 ;"    >
+  		<thead class="thead-light">
+  		<tr>
+  			<th>Tên khách hàng</th>
+  			<th>SĐT khách hàng</th>
+  			<th>Email khách hàng</th>
+  			<th>Ghi chú khách hàng</th>
+  			<th> Địa chỉ người nhận</th>
+  				<th> Tên shipper</th>
+  					<th> SĐT shipper</th>
+  		</tr>
+  		</thead>
+  		<tr>
+  			<td th:text="${donhangkh.nguoinhanten }"></td>
+  			<td th:text="${donhangkh.nguoinhansdt }"></td>
+  			<td th:text="${donhangkh.nguoinhanemail }"></td>
+  			<td th:text="${donhangkh.nguoinhanghichu }"></td>
+  			<td th:text="${donhangkh.nguoinhandiachi }"></td>
+  			<td th:text="${donhangkh.shipten }"></td>
+  			<td th:text="${donhangkh.shipsdt }"></td>
+  		</tr>
+
+</table>
+
+
+
+<table class="table" style=" border-radius: 25px; background-color: #A9D0F5 ;   " >
+    <thead class="thead-light">
+      <tr>
+         <th>Id Đơn hàng</th>
+        <th>Trạng thái</th>
+        <th> Thời gian đặt</th>
+        <th>Thời gian giao</th>
+        <th>Phương thức thanh toán</th>
+        <th>Phí vận chuyển</th>
+        <th> Tổng tiền</th>
+        <th></th>
+       </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td th:text="${donhangkh.donhangid }"></td>
+        <td   >
+        	<div th:if=" ${donhangkh.trangthaidonhangid }== 1 ">
+        		<h5 class="btn btn-primary" >Chờ xác nhận</h5>
+        	</div>
+        	<div th:if=" ${donhangkh.trangthaidonhangid }== 2 ">
+        		<h5 class="btn btn-warning" >  Đã xác nhận </h5>
+        	</div>
+        	<div th:if=" ${donhangkh.trangthaidonhangid }== 3 ">
+        		<h5 class="btn btn-success">  Đang giao    </h5>
+        	</div>
+        	<div th:if=" ${donhangkh.trangthaidonhangid }== 4 ">
+        		<h5 class="btn btn-danger"> Đã giao-hoàn thành </h5>
+        	</div>
+        	
+        	<div th:if=" ${donhangkh.trangthaidonhangid }== 99 ">
+        		<h5 class="btn btn-danger" disabled> Hủy đơn </h5>
+        	</div>
+        
+        
+        </td>
+       
+       
+       
+        <td >
+        	<h5 th:text="${donhangkh.ngaytao }" > </h5>
+        	<h5 th:text="${donhangkh.thoigiantao }" > </h5>
+        </td>
+        
+        <td th:text="${donhangkh.thoigiangiao }"  >
+        </td>
+        
+        <td  > 
+        	<div th:if=" ${donhangkh.phuongthucthanhtoan }== 1 ">
+        		<h5>Thanh toán tiền mặt</h5>
+        	</div>
+        	
+        	<div th:if=" ${donhangkh.phuongthucthanhtoan }== 100 ">
+        		<h5>Thanh toán online</h5>
+        	</div>
+        	
+        </td>
+        
+        
+        
+        
+        <td th:text="${donhangkh.phivanchuyen}" > </td>
+         <td th:text="${donhangkh.tongtien}" > </td>
+         <td>
+         <div th:if=" ${donhangkh.trangthaidonhangid }== 1 ">
+         
+         	<form class="was-validated" th:action="@{/huy-don-hang}" method="POST" th:object="${newdh}">
+         			
+        <input type="hidden" class="form-control"  th:name="donhangid" th:value="${donhangkh.donhangid}"   />
+         			
+         			
+         			<input class="btn btn-danger" type="submit"  value="Hủy đơn hàng "    onclick="return confirm(' Xác nhận hủy đơn ???')"    />
+         	
+         	</form>
+         
+         </div>
+         </td>
+      </tr>
+      
+      <!-- <tr>
+      
+      	<td colspan="5">
+      		<button type="button" class="btn btn-success">TĂƒÂ¡Ă‚Â»Ă¢â‚¬Â¢ng: 400000</button>
+			  <button type="button" class="btn btn-success">PhĂƒÆ’Ă‚Â­ ship: 0</button>
+			  <button type="button" class="btn btn-success">GiĂƒÂ¡Ă‚ÂºĂ‚Â£m giĂƒÆ’Ă‚Â¡: 0</button>
+			  <button type="button" class="btn btn-danger">TĂƒÂ¡Ă‚Â»Ă¢â‚¬Â¢ng tiĂƒÂ¡Ă‚Â»Ă¯Â¿Â½n: 400000</button>
+      	</td>
+      </tr> -->
+     
+    </tbody>
+  </table>
+  
+  
+  
+  
+  <center>
+  <table class="table" style="background-color:  #CEECF5 ; width:90% "   >
+ 	<thead class="thead-light">
+      <tr>
+       <th > Ảnh </th>
+        <th >   Tên sản phẩm   </th>
+        <th>  Giá tiền  </th>
+        <th>  Số lượng   </th>
+        
+       </tr>
+    </thead>
+  <th:block th:each="ctdh : ${ctdh}">
+  
+  
+  <div th:if="${donhangkh.donhangid } == ${ ctdh.donhangid }">
+  		
+  		
+    
+    <tbody>
+      <tr>
+      <td >
+      	
+      	<th:block th:each="sanpham : ${sanpham}">
+      		 
+      		<div th:if="${sanpham.sanphamid } == ${ ctdh.ctdhidsp }">
+      		
+      			<img style="height: 70px; width:70px;"  th:src="${sanpham.sanphamanhchinh}" class="img-responsive" alt="ảnh sản phẩm">
+      		
+      		</div>
+      		 
+      		 
+      	</th:block>
+      		
+      
+      
+      </td>
+      
+      
+      
+        <td th:text="${ ctdh.ctdhtensp }"></td>
+        <td th:text="${ ctdh.ctdhgiasp }"></td>
+        <td th:text="${ ctdh.ctdhsoluongsp }"></td>
+      </tr>
+      
+      <!-- <tr>
+      
+      	<td colspan="5">
+      		<button type="button" class="btn btn-success">TĂƒÂ¡Ă‚Â»Ă¢â‚¬Â¢ng: 400000</button>
+			  <button type="button" class="btn btn-success">PhĂƒÆ’Ă‚Â­ ship: 0</button>
+			  <button type="button" class="btn btn-success">GiĂƒÂ¡Ă‚ÂºĂ‚Â£m giĂƒÆ’Ă‚Â¡: 0</button>
+			  <button type="button" class="btn btn-danger">TĂƒÂ¡Ă‚Â»Ă¢â‚¬Â¢ng tiĂƒÂ¡Ă‚Â»Ă¯Â¿Â½n: 400000</button>
+      	</td>
+      </tr> -->
+     
+    </tbody>
+  
+  
+  </div>
+  
+  
+  </th:block>
+  </table>
+  </center>
+  <hr >
+  <hr>
+  </th:block>
+  
+</div>
+
+
+	<!-- BEGIN PRE-FOOTER -->
+	<div th:replace="header :: pre-footer"></div>
+	<!-- END PRE-FOOTER -->
+
+	<!-- BEGIN FOOTER -->
+
+	<!-- END FOOTER -->
+
+	<!-- BEGIN fast view of a product -->
+
+	<!-- END fast view of a product -->
+
+	<div th:replace="header :: script_kh"></div>
+</body>
+<!-- END BODY -->
+</html>
